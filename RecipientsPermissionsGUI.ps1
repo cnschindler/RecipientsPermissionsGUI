@@ -20,7 +20,8 @@ Param()
 [System.IO.FileInfo]$LogfileName = ($ScriptName.BaseName + "_{0:yyyyMMdd-HHmmss}.log" -f [DateTime]::Now)
 
 # Combine the script directory and logfile name to create the full path of the logfile
-[System.IO.FileInfo]$script:LogFileFullPath = Join-Path -Path $PSScriptRoot -ChildPath $LogfileName
+$LogFolder = "Logs"
+[System.IO.FileInfo]$script:LogFileFullPath = Join-Path -Path $PSScriptRoot (Join-Path -Path $LogFolder -ChildPath $LogfileName)
 
 # Set start and stop messages for the logfile
 [string]$Script:LogFileStart = "{0:dd.MM.yyyy H:mm:ss} : {1}" -f [DateTime]::Now, "Logging started"
@@ -158,7 +159,16 @@ function LoadFileBasedModules
 
     foreach ($File in $ModuleFiles)
     {
-        Import-Module -Name $file.Fullname -Force -DisableNameChecking
+        Try
+        {
+            Import-Module -Name $file.Fullname -Force -DisableNameChecking -ErrorAction Stop
+            Write-LogFile -Message "Successfully loaded module from file $($file.Fullname)."
+        }
+
+        Catch
+        {
+            Write-LogFile -Message "Unable to load module from file $($file.Fullname)." -ErrorInfo $_
+        }
     }
 }
 function Get-ObjectPickerSelection
@@ -201,9 +211,6 @@ Function Manage-SendAsPermissions
         [string]$Assignee,
         [switch]$RemovePermission
     )
-
-    $Recipient = Get-Recipient -Identity $Recipient -ErrorAction Stop
-    $Assignee = Get-Recipient -Identity $Assignee -ErrorAction Stop
 
     if ($RemovePermission)
     {
@@ -346,6 +353,7 @@ $Button_SelectRecipient.Add_Click(
         {
             $Textbox_Recipient.Text = $Recipient.fetchedAttributes[1]
             $Script:SelectedRecipient = $Recipient.fetchedAttributes[2]
+            Write-LogFile -Message "Selected Recipient: $($Recipient.fetchedAttributes[1]) with DistinguishedName: $($Recipient.fetchedAttributes[2])"
         }
     }
 )
@@ -364,6 +372,7 @@ $Button_SelectAssignee.Add_Click(
         {
             $Textbox_Assignee.Text = $Assignee.fetchedAttributes[1]
             $Script:SelectedAssignee = $Assignee.fetchedAttributes[1]
+            Write-LogFile -Message "Selected Assignee Email-Address: $($Assignee.fetchedAttributes[1])"
         }
     }
 )
@@ -407,5 +416,11 @@ LoadFileBasedModules -Path $ModulePath
 # Connect to Exchange Server, load EMS if no connection exists
 Connect-Exchange | Out-Null
 
+$Form.Add_Closed(
+    {
+        Write-LogFile -Message "Form closed by user. Stopping logging."
+        Write-LogFile -Message $LogFileStop
+    }
+)
 # Load Form
 $Form.ShowDialog() | Out-Null
