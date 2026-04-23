@@ -1,0 +1,5 @@
+﻿23.04.2026 18:17:00 : Logging started
+23.04.2026 18:17:00 : INFO : Successfully loaded module from file C:\GitClone\RecipientsPermissionsGUI\Modules\ActiveDirectoryObjectPicker\ActiveDirectoryObjectPicker.psm1.
+23.04.2026 18:17:13 : INFO : Selected Recipient: Group2@vmm.lab with DistinguishedName: CN=Group2,OU=Users,OU=Accounts,DC=vmm,DC=lab
+23.04.2026 18:17:18 : INFO : Form closed by user. Stopping logging.
+23.04.2026 18:17:18 : INFO : Logging stopped

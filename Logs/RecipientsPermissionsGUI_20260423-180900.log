@@ -1,0 +1,6 @@
+﻿23.04.2026 18:09:00 : Logging started
+23.04.2026 18:09:01 : INFO : Successfully loaded module from file C:\GitClone\RecipientsPermissionsGUI\Modules\ActiveDirectoryObjectPicker\ActiveDirectoryObjectPicker.psm1.
+23.04.2026 18:09:07 : INFO : Successfully loaded Exchange Management Shell Module.
+23.04.2026 18:09:12 : INFO : Successfully connected to Exchange Server.
+23.04.2026 18:14:25 : INFO : Form closed by user. Stopping logging.
+23.04.2026 18:14:25 : INFO : Logging stopped

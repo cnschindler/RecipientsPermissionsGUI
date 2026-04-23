@@ -270,12 +270,12 @@ Add-Type -AssemblyName PresentationFramework, System.Drawing, System.Windows.For
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label x:Name="Label_Recipient" Content="Recipient" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="72" FontWeight="Bold"/>
-        <TextBox x:Name="Textbox_Recipient" HorizontalAlignment="Left" Height="25" Margin="20,0,0,2" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="370" TabIndex="1" FontSize="12"/>
+        <TextBox x:Name="Textbox_Recipient" HorizontalAlignment="Left" Height="25" Margin="20,0,0,2" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="370" TabIndex="1" FontSize="12" IsReadOnly="True"/>
         <Button x:Name="Button_SelectRecipient" HorizontalAlignment="Right" Height="30" Margin="0,0,20,0" VerticalAlignment="Bottom" Width="100" Grid.Column="1">
             <AccessText Text="Select Recipient..." TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
         <Label x:Name="Label_Assignee" Content="Assignee" HorizontalAlignment="Left" Height="27" Margin="20,10,0,0" VerticalAlignment="Top" Width="65" FontWeight="Bold" Grid.Row="1"/>
-        <TextBox x:Name="Textbox_Assignee" HorizontalAlignment="Left" Height="25" Margin="20,0,0,2" VerticalAlignment="Bottom" Width="370" FontSize="12" Grid.Row="1"/>
+        <TextBox x:Name="Textbox_Assignee" HorizontalAlignment="Left" Height="25" Margin="20,0,0,2" VerticalAlignment="Bottom" Width="370" FontSize="12" Grid.Row="1" IsReadOnly="True"/>
         <Button x:Name="Button_SelectAssignee" HorizontalAlignment="Right" Height="30" Margin="0,0,20,0" VerticalAlignment="Bottom" Width="100" Grid.Column="1" Grid.Row="1">
             <AccessText Text="Select Assignee..." TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
